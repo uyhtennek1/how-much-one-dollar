@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --text: #0b1426;
+    --background: #f0f0f0;
+    --primary: #00e0c6;
+    --secondary: #338ccc;
+    --accent: #009494;
+
+    color: var(--text);
+}
+
+body {
+    box-sizing: border-box;
+    width: 380px;
+    min-height: 300px;
+    background-color: var(--background);
+}
+
+#dropdown-currency-button {
+    border-width: 1px;
+    border-color: var(--primary);
+}
+
+.currency-icon {
+    width: 1.7rem;
+    height: 1.7rem;
+    object-fit: cover;
+    border-radius: 50%;
+}

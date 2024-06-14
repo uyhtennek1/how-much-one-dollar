@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>How Much One Dollar</title>
+    <link rel="stylesheet" href="../output/styles.css">
+</head>
+<body class="antialiased px-3 py-2">
+    <header>
+        <h2 class="text-base font-bold">Base Currency</h2>
+        <div class="flex shadow-md px-2 py-3 rounded-md gap-2 items-center bg-white">
+            <button id="dropdown-currency-button" data-dropdown-toggle="dropdown-currency" type="button" class="flex items-center text-lg font-bold rounded-full px-2 py-1 gap-2">
+                <img src="https://flagcdn.com/w40/hk.png" srcset="https://flagcdn.com/w80/hk.png 2x" alt="Hong Kong" class="currency-icon">
+                HKD
+                <svg class="w-2.5 h-2.5" aria-hidden="false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+            <div id="dropdown-currency" class="hidden bg-white rounded-lg shadow text-lg text-center">
+                <ul id="dropdown-currency" aria-labelledby="dropdown-currency-button bg-white">
+                    <li class="flex gap-3 w-32">
+                        <img src="https://flagcdn.com/w40/us.png" srcset="https://flagcdn.com/w40/us.png 2x" alt="United State" class="currency-icon">
+                        USD
+                    </li>
+                </ul>
+            </div>
+            <input type="number" id="currency-input" placeholder="Enter amount" class="flex-1 border-b-2 border-l-0 border-r-0 border-t-0 text-base">
+        </div>
+    </header>
+    <main class="mt-3">
+        <h2 class="text-base font-bold">Foreign Currencies <a href="https://google.com">link</a></h2>
+        <ul>
+            <li class="currency-exchanged">
+                <img src="https://flagcdn.com/w40/hk.png" srcset="https://flagcdn.com/w80/hk.png 2x" alt="Hong Kong" class="currency-icon">
+                HKD
+                <span>1100.00</span>
+            </li>
+            <li class="currency-exchanged">
+                <img src="https://flagcdn.com/w40/us.png" srcset="https://flagcdn.com/w80/us.png 2x" alt="United State" class="currency-icon">
+                HKD
+                <span>1100.00</span>
+            </li>
+        </ul>
+    </main>
+    <footer>
+        Last updated Jun 12, 2024, 21:40 UTC
+        <a href="https://google.com">Refresh</a>
+    </footer>
+
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+</body>
+</html>
