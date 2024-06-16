@@ -1,50 +1,60 @@
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>How Much One Dollar</title>
     <link rel="stylesheet" href="../output/styles.css">
 </head>
-<body class="antialiased px-3 py-2">
-    <header>
-        <h2 class="text-base font-bold">Base Currency</h2>
-        <div class="flex shadow-md px-2 py-3 rounded-md gap-2 items-center bg-white">
-            <button id="dropdown-currency-button" data-dropdown-toggle="dropdown-currency" type="button" class="flex items-center text-lg font-bold rounded-full px-2 py-1 gap-2">
-                <img src="https://flagcdn.com/w40/hk.png" srcset="https://flagcdn.com/w80/hk.png 2x" alt="Hong Kong" class="currency-icon">
-                HKD
-                <svg class="w-2.5 h-2.5" aria-hidden="false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                </svg>
+<body class="antialiased box-border flex flex-col">
+    <!-- <a href="#" class="absolute top-2 right-2 text-xs text-gray-600"><i data-lucide="settings"></i></a> -->
+    <header class="mx-4 mt-2">
+        <h2 class="mt-2">Base Currency</h2>
+        <div class="flex shadow-md px-3 py-3 rounded-md gap-2 bg-white mt-2 border border-gray-200">
+            <button id="dropdown-currency-button" data-dropdown-toggle="dropdown-currency" type="button" class="flex items-center text-lg font-bold rounded-full px-2 py-1 gap-1 flex-none border-2 box-border">
+                <img id="base-currency-flag" src="../node_modules/circle-flags/flags/hk.svg" alt="Hong Kong" class="currency-icon">
+                <span id="base-currency-name" class="uppercase w-10 text-center">hkd</span>
+                <span class="text-base text-center"><i data-lucide="chevron-down"></i></span>
             </button>
-            <div id="dropdown-currency" class="hidden bg-white rounded-lg shadow text-lg text-center">
-                <ul id="dropdown-currency" aria-labelledby="dropdown-currency-button bg-white">
-                    <li class="flex gap-3 w-32">
-                        <img src="https://flagcdn.com/w40/us.png" srcset="https://flagcdn.com/w40/us.png 2x" alt="United State" class="currency-icon">
-                        USD
-                    </li>
-                </ul>
+            <ul id="dropdown-currency" aria-labelledby="dropdown-currency-button" class="hidden bg-white rounded-lg shadow-md box-border w-36 divide-y divide-gray-100 border border-gray-300 z-10 py-2">
+                <li class="w-full">
+                    <button type="button" class="flex gap-4 text-lg font-semibold justify-center items-center py-2 w-full hover:bg-gray-100" value="">
+                        <img src="../node_modules/circle-flags/flags/us.svg" alt="United State" class="currency-icon">
+                        <span class="uppercase">usd</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="border-b-2 text-xl flex items-center gap-1 ml-2 flex-1">
+                <label for="currency-input">$</label>
+                <input type="number" id="currency-input" placeholder="Enter amount" value="1" class="border-none w-full text-xl p-0 text-center font-mono mt-1 placeholder-shown:font-sans placeholder-shown:text-lg overflow-ellipsis">
             </div>
-            <input type="number" id="currency-input" placeholder="Enter amount" class="flex-1 border-b-2 border-l-0 border-r-0 border-t-0 text-base">
         </div>
     </header>
-    <main class="mt-3">
-        <h2 class="text-base font-bold">Foreign Currencies <a href="https://google.com">link</a></h2>
-        <ul>
-            <li class="currency-exchanged">
-                <img src="https://flagcdn.com/w40/hk.png" srcset="https://flagcdn.com/w80/hk.png 2x" alt="Hong Kong" class="currency-icon">
-                HKD
-                <span>1100.00</span>
-            </li>
-            <li class="currency-exchanged">
-                <img src="https://flagcdn.com/w40/us.png" srcset="https://flagcdn.com/w80/us.png 2x" alt="United State" class="currency-icon">
-                HKD
-                <span>1100.00</span>
+    <main class="mt-6 mx-4 flex-1">
+        <div class="flex justify-between items-end">
+            <h2>
+                Foreign Currencies
+                <a href="#" class="text-gray-400"><i data-lucide="square-arrow-out-up-right" class="inline-block w-4 h-4 mb-1.5 ml-1"></i></a>
+            </h2>
+            <div class="text-base font-semibold hover:cursor-pointer mr-2">Edit</div>
+        </div>
+        <ul id="foreign-currency-list" class="overflow-auto relative my-2">
+            <li class="currency-exchanged mr-3 ml-5 mb-2 first:shadow-md first:rounded-md first:pl-4 first:py-3 first:mx-0 first:pr-5 first:border first:border-gray-200 first:sticky first:top-0 first:bg-white">
+                <img src="../node_modules/circle-flags/flags/hk.svg" alt="Hong Kong" class="currency-icon">
+                <span class="currency-name">HKD</span>
+                <span class="currency-amount font-mono overflow-ellipsis">1.20</span>
+                <i data-lucide="arrow-up-down" class="text-gray-200 mr-1"></i>
+                <i data-lucide="list-start" class="text-gray-200"></i>
             </li>
         </ul>
     </main>
-    <footer>
-        Last updated Jun 12, 2024, 21:40 UTC
-        <a href="https://google.com">Refresh</a>
+    <footer class="w-full text-end">
+        <p class="text-xs mr-3 mb-1 text-gray-800">
+            <span class="mr-1.5">Last updated Jun 12, 2024, 21:40 UTC</span>
+            <i data-lucide="refresh-ccw" class="inline w-4 h-4 text-gray-300 mb-0.5 hover:cursor-pointer"></i>
+        </p>
     </footer>
 
     <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="../node_modules/lucide/dist/umd/lucide.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

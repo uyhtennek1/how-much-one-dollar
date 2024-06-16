@@ -4,7 +4,7 @@
 
 :root {
     --text: #0b1426;
-    --background: #f0f0f0;
+    --background: #ffffff;
     --primary: #00e0c6;
     --secondary: #338ccc;
     --accent: #009494;
@@ -13,20 +13,87 @@
 }
 
 body {
-    box-sizing: border-box;
-    width: 380px;
-    min-height: 300px;
+    width: 420px;
     background-color: var(--background);
 }
 
+h2 {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
 #dropdown-currency-button {
-    border-width: 1px;
     border-color: var(--primary);
+}
+
+#foreign-currency-list {
+    max-height: 260px;
+    scrollbar-width: thin;
 }
 
 .currency-icon {
     width: 1.7rem;
     height: 1.7rem;
-    object-fit: cover;
-    border-radius: 50%;
+}
+
+.currency-exchanged {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.currency-exchanged img {
+    transform: translateY(0.1rem);
+    z-index: -1;
+}
+
+.currency-exchanged:first-child img {
+    transform: translateY(0.1rem) scale(1.2);
+}
+
+.currency-name {
+    box-sizing: border-box;
+    font-weight: 500;
+    width: 3rem;
+    text-align: center;
+    margin-left: 0.5rem;
+}
+
+.currency-exchanged:first-child .currency-name {
+    font-size: 1.4rem;
+    margin-left: 1rem;
+    text-align: start;
+}
+
+.currency-amount {
+    flex: 1;
+    text-align: end;
+    margin-right: 1.4rem;
+    margin-top: 0.1rem;
+}
+
+.currency-exchanged:first-child .currency-amount {
+    font-size: 1.4rem;
+    margin-right: 2.35rem;
+}
+
+.currency-exchanged svg {
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.currency-exchanged svg:hover {
+    cursor: pointer;
+}
+
+.currency-exchanged:first-child svg {
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.currency-exchanged:first-child svg.lucide-list-start {
+    display: none;
 }

@@ -3,6 +3,8 @@
     "tailwindcss": "^3.4.4"
   },
   "dependencies": {
-    "flowbite": "^2.3.0"
+    "circle-flags": "github:HatScripts/circle-flags",
+    "flowbite": "^2.3.0",
+    "lucide": "^0.394.0"
   }
 }
