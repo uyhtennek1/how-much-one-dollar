@@ -15,6 +15,14 @@ const CURRENCIES = {
         issuedBy_code: 'au',
         issuedBy_flag: getFlagUrl('au')
     },
+    'cad': {
+        name: 'Canadian dollar',
+        code: 'CAD',
+        symbol: '$',
+        issuedBy: 'Canada',
+        issuedBy_code: 'ca',
+        issuedBy_flag: getFlagUrl('ca')
+    },
     'cny': {
         name: 'Renminbi',
         code: 'CNY',
@@ -22,6 +30,22 @@ const CURRENCIES = {
         issuedBy: 'China',
         issuedBy_code: 'cn',
         issuedBy_flag: getFlagUrl('cn')
+    },
+    'eur': {
+        name: 'Euro',
+        code: 'EUR',
+        symbol: '€',
+        issuedBy: 'European Union',
+        issuedBy_code: 'eu',
+        issuedBy_flag: getFlagUrl('european_union')
+    },
+    'gbp':{
+        name: 'Pound',
+        code: 'GBP',
+        symbol: '£',
+        issuedBy: 'Great Britain',
+        issuedBy_code: 'gb',
+        issuedBy_flag: getFlagUrl('gb')
     },
     'hkd': {
         name: 'Hong Kong dollar',
