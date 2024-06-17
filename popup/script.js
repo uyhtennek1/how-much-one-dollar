@@ -95,6 +95,8 @@ const $foreignCurrencyList = document.querySelector('#foreign-currency-list');
 const $foreignCurrencyPrefab = $foreignCurrencyList.querySelector('li.currency-exchanged');
 
 
+
+
 // -------- DOM manipulations --------
 
 function createBaseCurrencyOption(optVal, currency) {
@@ -160,6 +162,17 @@ const appView = (function() {
         $baseCurrencyDropdown.replaceChildren(
             ...Object.keys(CURRENCIES).map(x => createBaseCurrencyOption(x, CURRENCIES[x]))
         );
+
+        const $sun =  document.querySelector('#sun');
+        const $moon = document.querySelector('#moon');
+        $sun.addEventListener('click', function (){
+            $sun.classList.add('hidden');
+            $moon.classList.remove('hidden');
+        });
+        $moon.addEventListener('click', function (){
+            $sun.classList.remove('hidden');
+            $moon.classList.add('hidden');
+        });
 
         updateBaseCurrency(base_currency);
         updateCurrencyList(currency_rates);
