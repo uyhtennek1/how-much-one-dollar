@@ -131,8 +131,7 @@ function createBaseCurrencyOption(optVal, currency) {
     return $currencyOptionInstance;
 }
 
-function createCurrencyListItem(currencyCode, amount) {
-
+function createCurrencyListItem(currencyCode, amount, index) {
     const $item = $foreignCurrencyPrefab.cloneNode(true);
     const $itemFlag = $item.querySelector('img.currency-icon');
     const $itemCode = $item.querySelector('span.currency-name');
@@ -145,6 +144,11 @@ function createCurrencyListItem(currencyCode, amount) {
     $itemFlag.src = currencyInfo.issuedBy_flag;
     $itemCode.textContent = currencyInfo.code;
     $itemAmount.textContent = currencyInfo.symbol + amount;
+
+    $raiseTopBtn.addEventListener('click', function (){
+        $foreignCurrencyList.removeChild($item)
+        $foreignCurrencyList.insertBefore( $item, $foreignCurrencyList.firstChild)
+    });
 
     return $item;
 }
@@ -218,9 +222,10 @@ const appView = (function() {
     const updateCurrencyList = (foreignCurrencies) => {
         console.log(foreignCurrencies);
         $foreignCurrencyList.replaceChildren(
-            ...Object.keys(foreignCurrencies).map(x => createCurrencyListItem(
+            ...Object.keys(foreignCurrencies).map((x, i) => createCurrencyListItem(
                 x,
-                formatCurrency($baseCurrencyAmountInput.value * foreignCurrencies[x])
+                formatCurrency($baseCurrencyAmountInput.value * foreignCurrencies[x]),
+                i
             ))
         );
     };
@@ -245,3 +250,7 @@ $baseCurrencyAmountInput.addEventListener('change', async () => {
 (async function() {
     await appView.init();
 })();
+
+function onToTheTopClicked() {
+    alert("hi");
+}
