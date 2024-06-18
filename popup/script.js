@@ -138,6 +138,7 @@ function createCurrencyListItem(currencyCode, amount, index) {
     const $itemAmount = $item.querySelector('span.currency-amount');
     const $reverseBtn = $item.querySelector('svg.lucide-arrow-up-down');
     const $raiseTopBtn = $item.querySelector('svg.lucide-list-start');
+    const $deleteCurrency = $item.querySelector('svg.lucide-trash-2')
 
     const currencyInfo = CURRENCIES[currencyCode];
 
@@ -150,8 +151,29 @@ function createCurrencyListItem(currencyCode, amount, index) {
         $foreignCurrencyList.insertBefore( $item, $foreignCurrencyList.firstChild)
     });
 
-    return $item;
+    $deleteCurrency.addEventListener('click', function (){
+        $foreignCurrencyList.removeChild($item)
+        // $foreignCurrencyList.insertBefore( $item, $foreignCurrencyList.firstChild)
+    });
+
+    const $Edit = document.querySelector('#Edit');
+    $Edit.addEventListener('click',function(){
+        if($reverseBtn.classList.contains('hidden')){
+            $reverseBtn.classList.remove('hidden');
+            $raiseTopBtn.classList.remove('hidden');
+            $deleteCurrency.classList.remove('hidden');
+        }else{
+            $reverseBtn.classList.add('hidden');
+            $raiseTopBtn.classList.add('hidden');
+            $deleteCurrency.classList.add('hidden');
+        };    
+    });
+
+return $item;
 }
+
+
+
 
 
 // -------- Code starts here --------
@@ -215,6 +237,9 @@ const appView = (function() {
             $baseCurrencyAmountInput.value = 1;
         }
 
+        // hide edit options
+
+
         // End
         $baseCurrencyAmountInput.select();
     };
@@ -254,3 +279,23 @@ $baseCurrencyAmountInput.addEventListener('change', async () => {
 function onToTheTopClicked() {
     alert("hi");
 }
+
+// daniel
+function switchToLightMode() {
+    document.getElementById('sun').classList.add('hidden');
+    document.getElementById('moon').classList.remove('hidden');
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+}
+function switchToDarkMode() {
+    document.getElementById('sun').classList.remove('hidden');
+    document.getElementById('moon').classList.add('hidden');
+    document.body.classList.remove('light-mode');
+    document.body.classList.add('dark-mode');
+}
+window.addEventListener('load', function() {
+    const $sun = document.getElementById('sun');
+    const $moon = document.getElementById('moon');
+    $sun.addEventListener('click', switchToLightMode);
+    $moon.addEventListener('click', switchToDarkMode);
+});

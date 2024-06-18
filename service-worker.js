@@ -15,7 +15,7 @@ const RATE_KEEP_TIME = 10_000; // prouction: 40 * 60 * 1000;
 
 let baseCurrency = 'hkd';
 let sourceApiName = 'exchangerate_api';
-let currencyList = ['usd', 'cny', 'jpy', 'twd'];
+let currencyList = ['usd', 'cny', 'jpy', 'twd','aud','gbp','eur','cad'];
 
 let exchangeRates = {};
 let earliestFetchTime;

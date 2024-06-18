@@ -12,10 +12,30 @@
     color: var(--text);
 }
 
+/* daniel */
+.light-mode {
+    --background: #FFFFFF;
+    --text: #000000;
+}
+
+.dark-mode {
+    --background: #000000;
+    --text: #FFFFFF;
+}
+
 body {
     width: 420px;
+    height: 460px;
     background-color: var(--background);
+    color: var(--text);;
 }
+
+/* 原本的code
+body {
+    width: 420px;
+    height: 460px;
+    background-color: var(--background);
+} */
 
 h2 {
     font-weight: 700;
@@ -32,7 +52,7 @@ h2 {
 }
 
 #foreign-currency-list {
-    max-height: 260px;
+    max-height: 220px;
 }
 
 .currency-icon {
@@ -123,7 +143,7 @@ h2 a:hover {
 } 
 
 #sun {
-    color: rgb(133, 129, 129);
+    color: rgb(223, 218, 218);
     position: absolute;
     top: 15px;
 }
@@ -134,7 +154,7 @@ h2 a:hover {
 } 
 
 #moon {
-    color: rgb(242, 242, 236);
+    color: rgb(125, 125, 120);
     position: absolute;
     top: 15px;
 }
@@ -143,6 +163,14 @@ h2 a:hover {
     color: var(--primary);
     transition: color 0.3s ease-in-out;
 } 
+
+#addNewCurrency:hover {
+    cursor: pointer;
+    color: var(--primary);
+    transition: color 0.3s ease-in-out;
+}
+
+
 
 ::-webkit-scrollbar {
     width: 5px;
