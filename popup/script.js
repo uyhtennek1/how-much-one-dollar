@@ -149,6 +149,12 @@ function createCurrencyListItem(currencyCode, amount, index) {
     $raiseTopBtn.addEventListener('click', function (){
         $foreignCurrencyList.removeChild($item)
         $foreignCurrencyList.insertBefore( $item, $foreignCurrencyList.firstChild)
+        const isHidden = $moon.classList.contains('hidden');
+            if (isHidden) {
+                switchToLightMode();
+            } else {
+                switchToDarkMode();
+            }
     });
 
     $deleteCurrency.addEventListener('click', function (){
@@ -169,10 +175,21 @@ function createCurrencyListItem(currencyCode, amount, index) {
         };    
     });
 
+
+    // daniel 上下箭頭 function，不過調整位置唔啱。
+    // $itemFlag.src = currencyInfo.issuedBy_flag;
+    // $itemCode.textContent = currencyInfo.code;
+    // $itemAmount.textContent = `${currencyInfo.symbol}${amount}`;
+    // $reverseBtn.addEventListener('click', function () {
+    //     const $listItem = $item.closest('li');
+    //     const $previousItem = $listItem.previousElementSibling;
+    //     if ($previousItem) {
+    //         $foreignCurrencyList.insertBefore($listItem, $previousItem);
+    //     }
+    // });
+
 return $item;
 }
-
-
 
 
 
@@ -300,7 +317,10 @@ function switchToLightMode() {
     $refreshTime.style.color = 'black';
     $dropdown.classList.remove('darkSrceen');
     $baseCurrencyAmountInput.classList.remove('darkSrceen');
+    document.querySelector('.currency-exchanged').classList.remove('first:bg-black');
     document.querySelector('.currency-exchanged').classList.add('first:bg-white', 'first:text-black');
+    $baseCurrencyDropdown.classList.add('bg-white');
+    $baseCurrencyDropdown.classList.remove('bg-black');
     // $baseCurrencyDropdown.classList.remove('bg-black');
     // $baseCurrencyDropdown.classList.add('bg-white');
     
@@ -315,7 +335,10 @@ function switchToDarkMode() {
     $refreshTime.style.color = 'white';
     $dropdown.classList.add('darkSrceen');
     $baseCurrencyAmountInput.classList.add('darkSrceen');
+    document.querySelector('.currency-exchanged').classList.add('first:bg-black');
     document.querySelector('.currency-exchanged').classList.remove('first:bg-white', 'first:text-black');
+    $baseCurrencyDropdown.classList.remove('bg-white');
+    $baseCurrencyDropdown.classList.add('bg-black');
     // $baseCurrencyDropdown.classList.remove('bg-white');
     // $baseCurrencyDropdown.classList.add('bg-black');
     // $baseCurrencyName.classList.add('fontColor');
@@ -364,3 +387,4 @@ $refresh.addEventListener('click', async function() {
         switchToDarkMode();
     }
 });
+
