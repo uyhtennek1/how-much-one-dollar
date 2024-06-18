@@ -5,10 +5,9 @@
     <link rel="stylesheet" href="../output/styles.css">
 </head>
 <body class="antialiased box-border flex flex-col">
-    <!-- <a href="#" class="absolute top-2 right-2 text-xs text-gray-600"><i data-lucide="settings"></i></a> -->
-    <div class="absolute left-96">
-      <i data-lucide="sun" class="text-gray-200" id="sun" fill="rgb(223, 218, 218)" strokeWidth="{0}"></i>
-      <i data-lucide="moon" class="text-gray-700 hidden" id="moon"></i>
+    <div class="absolute left-96 hover:cursor-pointer">
+      <i data-lucide="sun" class="text-gray-700" id="sun"></i>
+      <i data-lucide="moon" class="text-gray-300 hidden" id="moon"></i>
     </div>  
     <header class="mx-4 mt-2">
         <h2 class="mt-2">Base Currency</h2>
@@ -39,7 +38,7 @@
                 Foreign Currencies
                 <a href="https://www.xe.com/currencyconverter/" target="_blank" class="text-gray-400"><i data-lucide="square-arrow-out-up-right" class="inline-block w-4 h-4 mb-1.5 ml-1"></i></a>
             </h2>
-            <div class="text-base font-semibold hover:cursor-pointer  mr-2" id="Edit">Edit</div>
+            <div class="text-base font-semibold hover:cursor-pointer  mr-2" id="edit">Edit</div>
         </div>
         <ul id="foreign-currency-list" class="overflow-auto relative my-2">
             <li class="currency-exchanged mr-3 ml-5 mb-2 first:shadow-md first:rounded-md first:pl-4 first:py-3 first:mx-0 first:pr-5 first:border first:border-gray-200 first:sticky first:top-0 first:bg-white first:text-black">
@@ -47,8 +46,8 @@
                 <img src="../node_modules/circle-flags/flags/hk.svg" alt="Hong Kong" class="currency-icon">
                 <span  class="currency-name">HKD</span>
                 <span class="currency-amount font-mono overflow-ellipsis">1.20</span>
-                <i data-lucide="arrow-up-down" class="text-gray-200 mr-1 hidden" ></i>
-                <i data-lucide="list-start" class="text-gray-200 hidden"></i>
+                <i data-lucide="arrow-up-down" class="text-gray-200 mr-1" ></i>
+                <i data-lucide="list-start" class="text-gray-200"></i>
             </li>
         </ul>
        <div><i data-lucide="circle-plus" class="text-center mx-auto w-full text-gray-400" id="addNewCurrency"></i></div>  

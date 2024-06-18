@@ -94,7 +94,7 @@ const $baseCurrencyOptionPrefab = $baseCurrencyDropdown.querySelector('li');
 const $foreignCurrencyList = document.querySelector('#foreign-currency-list');
 const $foreignCurrencyPrefab = $foreignCurrencyList.querySelector('li.currency-exchanged');
 
-
+const $editBtn = document.querySelector('#edit');
 
 
 // -------- DOM manipulations --------
@@ -147,51 +147,38 @@ function createCurrencyListItem(currencyCode, amount, index) {
     $itemCode.textContent = currencyInfo.code;
     $itemAmount.textContent = currencyInfo.symbol + amount;
 
-    $raiseTopBtn.addEventListener('click', function (){
-        $foreignCurrencyList.removeChild($item)
-        $foreignCurrencyList.insertBefore( $item, $foreignCurrencyList.firstChild)
-        const isHidden = $moon.classList.contains('hidden');
-            if (isHidden) {
-                switchToLightMode();
-            } else {
-                switchToDarkMode();
-            }
+    $reverseBtn.addEventListener('click', async () => {
+        const old_rates = await chrome.runtime.sendMessage({ greeting: 'get-current-rates'});
+        const { old_currency, new_currency } = await chrome.runtime.sendMessage({
+            greeting: 'set-base-currency', currency: currencyCode
+        });
+
+        appView.updateBaseCurrency(new_currency, old_currency, old_rates);
+
+        const currencyRates = await chrome.runtime.sendMessage({
+            greeting: 'replace-foreign-currency', with_currency: old_currency
+        });
+        appView.updateCurrencyList(currencyRates);
+    });
+
+    $raiseTopBtn.addEventListener('click', async function (){
+        const rates = await chrome.runtime.sendMessage({
+            greeting: 'reorder-list',
+            from: Array.from($item.parentNode.children).indexOf($item),
+            to: 0
+        });
+        appView.updateCurrencyList(rates);
     });
 
     $deleteCurrency.addEventListener('click', function (){
-        $foreignCurrencyList.removeChild($item)
+        // Delete item
+
+        // $foreignCurrencyList.removeChild($item)
         // $foreignCurrencyList.insertBefore( $item, $foreignCurrencyList.firstChild)
     });
 
-    const $Edit = document.querySelector('#Edit');
-    $Edit.addEventListener('click',function(){
-        if($reverseBtn.classList.contains('hidden')){
-            $reverseBtn.classList.remove('hidden');
-            $raiseTopBtn.classList.remove('hidden');
-            $deleteCurrency.classList.remove('hidden');
-        }else{
-            $reverseBtn.classList.add('hidden');
-            $raiseTopBtn.classList.add('hidden');
-            $deleteCurrency.classList.add('hidden');
-        };    
-    });
-
-
-    // daniel 上下箭頭 function，不過調整位置唔啱。
-    // $itemFlag.src = currencyInfo.issuedBy_flag;
-    // $itemCode.textContent = currencyInfo.code;
-    // $itemAmount.textContent = `${currencyInfo.symbol}${amount}`;
-    // $reverseBtn.addEventListener('click', function () {
-    //     const $listItem = $item.closest('li');
-    //     const $previousItem = $listItem.previousElementSibling;
-    //     if ($previousItem) {
-    //         $foreignCurrencyList.insertBefore($listItem, $previousItem);
-    //     }
-    // });
-
-return $item;
+    return $item;
 }
-
 
 
 // -------- Code starts here --------
@@ -201,11 +188,16 @@ const appView = (function() {
     let baseCurrencyOptionElems = {};
 
     const init = async () => {
-        const { base_currency, currency_rates, fetch_time, fetch_from, current_list } = await chrome.runtime.sendMessage({ greeting: 'list' });
+        const loadListTask = chrome.runtime.sendMessage({ greeting: 'list' });
+        const loadAmountTask = chrome.storage.local.get('base_currency_amount');
+        
+        const { base_currency, currency_rates, fetch_time, fetch_from, current_list } = await loadListTask;
+        const { base_currency_amount } = await loadAmountTask;
 
         $baseCurrencyDropdown.replaceChildren(
             ...Object.keys(CURRENCIES).map(x => createBaseCurrencyOption(x, CURRENCIES[x]))
         );
+        $baseCurrencyAmountInput.value = base_currency_amount;
 
         const $sun =  document.querySelector('#sun');
         const $moon = document.querySelector('#moon');
@@ -251,21 +243,14 @@ const appView = (function() {
             const amountVal = $baseCurrencyAmountInput.value;
             $baseCurrencyAmountInput.value = formatCurrency(amountVal * oldRates[newCurrencyCode]);
         }
-        else {
-            $baseCurrencyAmountInput.value = 1;
-        }
-
-        // hide edit options
-
 
         // End
+        chrome.storage.local.set({ base_currency_amount: $baseCurrencyAmountInput.value });
         $baseCurrencyAmountInput.select();
-
         updateTime();
     };
 
     const updateCurrencyList = (foreignCurrencies) => {
-        console.log(foreignCurrencies);
         $foreignCurrencyList.replaceChildren(
             ...Object.keys(foreignCurrencies).map((x, i) => createCurrencyListItem(
                 x,
@@ -287,28 +272,29 @@ window.addEventListener('load', function() {
 });
 
 $baseCurrencyAmountInput.addEventListener('change', async () => {
+    chrome.storage.local.set({base_currency_amount: $baseCurrencyAmountInput.value});
     const { base_currency, currency_rates, fetch_time, fetch_from } = await chrome.runtime.sendMessage({ greeting: 'list' });
+
     appView.updateCurrencyList(currency_rates);
     $baseCurrencyAmountInput.blur();
+});
+
+$editBtn.addEventListener('click', function() {
+    // Enter edit mode
 });
 
 (async function() {
     await appView.init();
 })();
 
-function onToTheTopClicked() {
-    alert("hi");
-}
 
-// daniel + yoyo: dark mode
+// -------- daniel + yoyo: dark mode --------
 const $sun = document.querySelector('#sun');
 const $moon = document.querySelector('#moon');
 const $chevronDown = document.querySelector('#chevron-down');
 const $refreshTime = document.querySelector('#refreshTime');
 const $foreignList = document.querySelector('#foreignList');
 const $dropdown = document.querySelector('#dropdown');
-// const $countryName = document.querySelector('.country-name');
-
 
 function switchToLightMode() {
     $sun.classList.remove('hidden');
@@ -324,10 +310,8 @@ function switchToLightMode() {
     $baseCurrencyDropdown.classList.remove('bg-black');
     // $baseCurrencyDropdown.classList.remove('bg-black');
     // $baseCurrencyDropdown.classList.add('bg-white');
-    
-    
-    
 }
+
 function switchToDarkMode() {
     $sun.classList.add('hidden');
     $moon.classList.remove('hidden');
@@ -346,17 +330,17 @@ function switchToDarkMode() {
     // $chevronDown.classList.add('fontColor');
     // $baseCurrencySymbol.classList.add('fontColor');
     // $baseCurrencyAmountInput.classList.add('fontColor');
-    
-    // $countryName.style.color = 'black';    
 
+    // $countryName.style.color = 'black';
 }
+
 window.addEventListener('load', function() {
-    
     $sun.addEventListener('click', switchToDarkMode);
     $moon.addEventListener('click', switchToLightMode);
 });
 
-// yoyo: refresh time & currency
+
+// -------- yoyo: refresh time & currency --------
 const $refresh = document.querySelector('#refresh');
 
 function padZero(num) {

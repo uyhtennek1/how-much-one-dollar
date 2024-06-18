@@ -15,7 +15,7 @@ const RATE_KEEP_TIME = 10_000; // prouction: 40 * 60 * 1000;
 
 let baseCurrency = 'hkd';
 let sourceApiName = 'exchangerate_api';
-let currencyList = ['usd', 'cny', 'jpy', 'twd','aud','gbp','eur','cad'];
+let currencyList = ['usd', 'cny', 'jpy', 'twd', 'aud', 'gbp', 'eur'];
 
 let exchangeRates = {};
 let earliestFetchTime;
@@ -166,6 +166,18 @@ keepAlive();
 
             sendResponse({ old_currency: oldCurrency, new_currency: baseCurrency});
             chrome.storage.sync.set({ base_currency: baseCurrency });
+            return true;
+        }
+
+        else if (msg.greeting === 'reorder-list') {
+            currencyList.splice(msg.to, 0, currencyList.splice(msg.from, 1)[0]);
+
+            const res = {};
+            currencyList.forEach(x => {
+                res[x] = exchangeRates[`${baseCurrency}_${x}`][sourceApiName].rate;
+            });
+            sendResponse(res);
+            
             return true;
         }
 
