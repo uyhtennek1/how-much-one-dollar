@@ -280,22 +280,44 @@ function onToTheTopClicked() {
     alert("hi");
 }
 
-// daniel
+// daniel + yoyo
+const $sun = document.querySelector('#sun');
+const $moon = document.querySelector('#moon');
+const $chevronDown = document.querySelector('#chevron-down');
+const $refreshTime = document.querySelector('#refreshTime');
+const $foreignList = document.querySelector('#foreignList');
+// const $countryName = document.querySelector('.country-name');
+
+
 function switchToLightMode() {
-    document.getElementById('sun').classList.add('hidden');
-    document.getElementById('moon').classList.remove('hidden');
+    $sun.classList.add('hidden');
+    $moon.classList.remove('hidden');
     document.body.classList.remove('dark-mode');
     document.body.classList.add('light-mode');
+    $refreshTime.style.color = 'black';
+    // $baseCurrencyDropdown.classList.remove('bg-black');
+    // $baseCurrencyDropdown.classList.add('bg-white');
+    
+    
+    
 }
 function switchToDarkMode() {
-    document.getElementById('sun').classList.remove('hidden');
-    document.getElementById('moon').classList.add('hidden');
+    $sun.classList.remove('hidden');
+    $moon.classList.add('hidden');
     document.body.classList.remove('light-mode');
     document.body.classList.add('dark-mode');
+    // $baseCurrencyDropdown.classList.remove('bg-white');
+    // $baseCurrencyDropdown.classList.add('bg-black');
+    $baseCurrencyName.classList.add('fontColor');
+    $chevronDown.classList.add('fontColor');
+    $baseCurrencySymbol.classList.add('fontColor');
+    $baseCurrencyAmountInput.classList.add('fontColor');
+    $refreshTime.style.color = 'white';
+    // $countryName.style.color = 'black';    
+
 }
 window.addEventListener('load', function() {
-    const $sun = document.getElementById('sun');
-    const $moon = document.getElementById('moon');
+    
     $sun.addEventListener('click', switchToLightMode);
     $moon.addEventListener('click', switchToDarkMode);
 });

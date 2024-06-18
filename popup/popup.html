@@ -12,17 +12,18 @@
     </div>  
     <header class="mx-4 mt-2">
         <h2 class="mt-2">Base Currency</h2>
-        <div class="flex shadow-md px-3 py-3 rounded-md gap-2 bg-white mt-2 border border-gray-200">
+        <div  class="flex shadow-md px-3 py-3 bg-white rounded-md gap-2 mt-2 border border-gray-200">
             <button id="dropdown-currency-button" data-dropdown-toggle="dropdown-currency" type="button" class="flex items-center text-lg font-bold rounded-full px-2 py-1 gap-1 flex-none border-2 box-border">
                 <img id="base-currency-flag" src="../node_modules/circle-flags/flags/hk.svg" alt="Hong Kong" class="currency-icon">
                 <span id="base-currency-name" class="uppercase w-10 text-center">hkd</span>
-                <span class="text-base text-center"><i data-lucide="chevron-down"></i></span>
+                <span id="chevron-down" class="text-base text-center"><i data-lucide="chevron-down"></i></span>
             </button>
             <ul id="dropdown-currency" aria-labelledby="dropdown-currency-button" class="hidden bg-white rounded-lg shadow-md box-border w-36 divide-y divide-gray-100 border border-gray-300 z-10 py-2">
+          
                 <li class="w-full">
                     <button type="button" class="flex gap-4 text-lg font-semibold justify-center items-center py-2 w-full hover:bg-gray-100" value="">
                         <img src="../node_modules/circle-flags/flags/us.svg" alt="United State" class="currency-icon">
-                        <span class="uppercase">usd</span>
+                        <span id="countryName" class="uppercase">usd</span>
                     </button>
                 </li>
             </ul>
@@ -41,10 +42,10 @@
             <div class="text-base font-semibold hover:cursor-pointer  mr-2" id="Edit">Edit</div>
         </div>
         <ul id="foreign-currency-list" class="overflow-auto relative my-2">
-            <li class="currency-exchanged mr-3 ml-5 mb-2 first:shadow-md first:rounded-md first:pl-4 first:py-3 first:mx-0 first:pr-5 first:border first:border-gray-200 first:sticky first:top-0 first:bg-white">
+            <li class="currency-exchanged mr-3 ml-5 mb-2 first:shadow-md first:rounded-md first:pl-4 first:py-3 first:mx-0 first:pr-5 first:border first:border-gray-200 first:sticky first:top-0 first:bg-white first:text-black">
                 <i  data-lucide="trash-2" class="text-gray-200 hidden"></i>
                 <img src="../node_modules/circle-flags/flags/hk.svg" alt="Hong Kong" class="currency-icon">
-                <span class="currency-name">HKD</span>
+                <span  class="currency-name">HKD</span>
                 <span class="currency-amount font-mono overflow-ellipsis">1.20</span>
                 <i data-lucide="arrow-up-down" class="text-gray-200 mr-1 hidden" ></i>
                 <i data-lucide="list-start" class="text-gray-200 hidden"></i>
@@ -54,7 +55,7 @@
     </main>
     <footer class="w-full text-end fixed bottom-0">
         <p class="text-xs mr-3 mb-1 text-gray-800" >
-            <span class="mr-1.5 ">Last updated Jun 12, 2024, 21:40 UTC</span>
+            <span  id="refreshTime" class="mr-1.5 ">Last updated Jun 12, 2024, 21:40 UTC</span>
             <i data-lucide="refresh-ccw" class="inline w-4 h-4 text-gray-300 mb-0.5 hover:cursor-pointer" id="refresh"></i>
         </p>
     </footer>

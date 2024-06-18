@@ -16,11 +16,13 @@
 .light-mode {
     --background: #FFFFFF;
     --text: #000000;
+   
 }
 
 .dark-mode {
     --background: #000000;
     --text: #FFFFFF;
+    
 }
 
 body {
@@ -42,6 +44,10 @@ h2 {
     font-size: 1.1rem;
 }
 
+.fontColor {
+    color: #353434;
+}
+
 #dropdown-currency{
     max-height: 160px;
     overflow: auto;
@@ -50,6 +56,7 @@ h2 {
 #dropdown-currency-button {
     border-color: var(--primary);
 }
+
 
 #foreign-currency-list {
     max-height: 220px;
@@ -84,6 +91,10 @@ h2 {
     width: 3rem;
     text-align: center;
     margin-left: 0.5rem;
+}
+
+#countryName {
+    color: #64748b;
 }
 
 .currency-exchanged:first-child .currency-name {
