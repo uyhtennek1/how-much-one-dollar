@@ -110,6 +110,7 @@ function createBaseCurrencyOption(optVal, currency) {
     $optionFlag.src = currency.issuedBy_flag;
     $optionFlag.alt = currency.issuedBy;
     $optionName.textContent = currency.code;
+    $optionName.style.width = '40px';
 
     $optionBtn.addEventListener('click', async () => {
 
