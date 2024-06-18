@@ -242,6 +242,8 @@ const appView = (function() {
 
         // End
         $baseCurrencyAmountInput.select();
+
+        updateTime();
     };
 
     const updateCurrencyList = (foreignCurrencies) => {
@@ -280,21 +282,25 @@ function onToTheTopClicked() {
     alert("hi");
 }
 
-// daniel + yoyo
+// daniel + yoyo: dark mode
 const $sun = document.querySelector('#sun');
 const $moon = document.querySelector('#moon');
 const $chevronDown = document.querySelector('#chevron-down');
 const $refreshTime = document.querySelector('#refreshTime');
 const $foreignList = document.querySelector('#foreignList');
+const $dropdown = document.querySelector('#dropdown');
 // const $countryName = document.querySelector('.country-name');
 
 
 function switchToLightMode() {
-    $sun.classList.add('hidden');
-    $moon.classList.remove('hidden');
+    $sun.classList.remove('hidden');
+    $moon.classList.add('hidden');
     document.body.classList.remove('dark-mode');
     document.body.classList.add('light-mode');
     $refreshTime.style.color = 'black';
+    $dropdown.classList.remove('darkSrceen');
+    $baseCurrencyAmountInput.classList.remove('darkSrceen');
+    document.querySelector('.currency-exchanged').classList.add('first:bg-white', 'first:text-black');
     // $baseCurrencyDropdown.classList.remove('bg-black');
     // $baseCurrencyDropdown.classList.add('bg-white');
     
@@ -302,22 +308,59 @@ function switchToLightMode() {
     
 }
 function switchToDarkMode() {
-    $sun.classList.remove('hidden');
-    $moon.classList.add('hidden');
+    $sun.classList.add('hidden');
+    $moon.classList.remove('hidden');
     document.body.classList.remove('light-mode');
     document.body.classList.add('dark-mode');
+    $refreshTime.style.color = 'white';
+    $dropdown.classList.add('darkSrceen');
+    $baseCurrencyAmountInput.classList.add('darkSrceen');
+    document.querySelector('.currency-exchanged').classList.remove('first:bg-white', 'first:text-black');
     // $baseCurrencyDropdown.classList.remove('bg-white');
     // $baseCurrencyDropdown.classList.add('bg-black');
-    $baseCurrencyName.classList.add('fontColor');
-    $chevronDown.classList.add('fontColor');
-    $baseCurrencySymbol.classList.add('fontColor');
-    $baseCurrencyAmountInput.classList.add('fontColor');
-    $refreshTime.style.color = 'white';
+    // $baseCurrencyName.classList.add('fontColor');
+    // $chevronDown.classList.add('fontColor');
+    // $baseCurrencySymbol.classList.add('fontColor');
+    // $baseCurrencyAmountInput.classList.add('fontColor');
+    
     // $countryName.style.color = 'black';    
 
 }
 window.addEventListener('load', function() {
     
-    $sun.addEventListener('click', switchToLightMode);
-    $moon.addEventListener('click', switchToDarkMode);
+    $sun.addEventListener('click', switchToDarkMode);
+    $moon.addEventListener('click', switchToLightMode);
+});
+
+// yoyo: refresh time & currency
+const $refresh = document.querySelector('#refresh');
+
+function padZero(num) {
+    return num < 10 ? '0' + num : num;
+}
+
+function formatTime(date) {
+    const year = date.getUTCFullYear();
+    const month = date.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' });
+    const day = padZero(date.getUTCDate());
+    const hours = padZero(date.getUTCHours());
+    const minutes = padZero(date.getUTCMinutes());
+
+    return `Last updated ${month} ${day}, ${year}, ${hours}:${minutes} UTC`;
+}
+
+function updateTime() {
+    const now = new Date();
+    const formattedTime = formatTime(now);
+    $refreshTime.innerText = formattedTime;
+}
+
+$refresh.addEventListener('click', async function() {
+    await appView.init()
+    const isHidden = $moon.classList.contains('hidden');
+    if (isHidden) {
+        switchToLightMode();
+    } else {
+        switchToDarkMode();
+    }
 });

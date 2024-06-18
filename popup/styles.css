@@ -44,6 +44,11 @@ h2 {
     font-size: 1.1rem;
 }
 
+.darkSrceen {
+    background-color: #000000;
+    border-color: #FFFFFF;
+}
+
 .fontColor {
     color: #353434;
 }

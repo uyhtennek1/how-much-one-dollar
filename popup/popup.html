@@ -7,12 +7,12 @@
 <body class="antialiased box-border flex flex-col">
     <!-- <a href="#" class="absolute top-2 right-2 text-xs text-gray-600"><i data-lucide="settings"></i></a> -->
     <div class="absolute left-96">
-      <i data-lucide="sun" class="text-gray-200 hidden" id="sun" fill="rgb(223, 218, 218)" strokeWidth="{0}"></i>
-      <i data-lucide="moon" class="text-gray-700 " id="moon"></i>
+      <i data-lucide="sun" class="text-gray-200" id="sun" fill="rgb(223, 218, 218)" strokeWidth="{0}"></i>
+      <i data-lucide="moon" class="text-gray-700 hidden" id="moon"></i>
     </div>  
     <header class="mx-4 mt-2">
         <h2 class="mt-2">Base Currency</h2>
-        <div  class="flex shadow-md px-3 py-3 bg-white rounded-md gap-2 mt-2 border border-gray-200">
+        <div  id="dropdown" class="flex shadow-md px-3 py-3 bg-white rounded-md gap-2 mt-2 border border-gray-200">
             <button id="dropdown-currency-button" data-dropdown-toggle="dropdown-currency" type="button" class="flex items-center text-lg font-bold rounded-full px-2 py-1 gap-1 flex-none border-2 box-border">
                 <img id="base-currency-flag" src="../node_modules/circle-flags/flags/hk.svg" alt="Hong Kong" class="currency-icon">
                 <span id="base-currency-name" class="uppercase w-10 text-center">hkd</span>
@@ -55,7 +55,7 @@
     </main>
     <footer class="w-full text-end fixed bottom-0">
         <p class="text-xs mr-3 mb-1 text-gray-800" >
-            <span  id="refreshTime" class="mr-1.5 ">Last updated Jun 12, 2024, 21:40 UTC</span>
+            <span  id="refreshTime" class="mr-1.5 "></span>
             <i data-lucide="refresh-ccw" class="inline w-4 h-4 text-gray-300 mb-0.5 hover:cursor-pointer" id="refresh"></i>
         </p>
     </footer>
