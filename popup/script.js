@@ -323,7 +323,7 @@ function switchToDarkMode() {
     $refreshTime.style.color = 'white';
     $dropdown.classList.add('darkSrceen');
     $baseCurrencyAmountInput.classList.add('darkSrceen');
-    document.querySelector('.currency-exchanged').classList.add('first:bg-black');
+    document.querySelector('.currency-exchanged').classList.add('first:bg-[#115e59]', 'first:border-0');
     document.querySelector('.currency-exchanged').classList.remove('first:bg-white', 'first:text-black');
     $baseCurrencyDropdown.classList.remove('bg-white');
     $baseCurrencyDropdown.classList.add('bg-black');
