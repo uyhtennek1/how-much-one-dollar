@@ -302,17 +302,18 @@ const $dropdown = document.querySelector('#dropdown');
 function switchToLightMode() {
     $sun.classList.remove('hidden');
     $moon.classList.add('hidden');
+    
     document.body.classList.remove('dark-mode');
     document.body.classList.add('light-mode');
     $refreshTime.style.color = 'black';
     $dropdown.classList.remove('darkSrceen');
     $baseCurrencyAmountInput.classList.remove('darkSrceen');
-    document.querySelector('.currency-exchanged').classList.remove('first:bg-black');
-    document.querySelector('.currency-exchanged').classList.add('first:bg-white', 'first:text-black');
+    // document.querySelector('.currency-exchanged').classList.remove('first:bg-black');
+    // document.querySelector('.currency-exchanged').classList.add('first:bg-white', 'first:text-black');
     $baseCurrencyDropdown.classList.add('bg-white');
     $baseCurrencyDropdown.classList.remove('bg-black');
-    // $baseCurrencyDropdown.classList.remove('bg-black');
-    // $baseCurrencyDropdown.classList.add('bg-white');
+    $baseCurrencyDropdown.classList.remove('bg-black');
+    $baseCurrencyDropdown.classList.add('bg-white');
 }
 
 function switchToDarkMode() {
@@ -323,8 +324,8 @@ function switchToDarkMode() {
     $refreshTime.style.color = 'white';
     $dropdown.classList.add('darkSrceen');
     $baseCurrencyAmountInput.classList.add('darkSrceen');
-    document.querySelector('.currency-exchanged').classList.add('first:bg-black');
-    document.querySelector('.currency-exchanged').classList.remove('first:bg-white', 'first:text-black');
+    // document.querySelector('.currency-exchanged').classList.add('first:bg-black');
+    // document.querySelector('.currency-exchanged').classList.remove('first:bg-white', 'first:text-black');
     $baseCurrencyDropdown.classList.remove('bg-white');
     $baseCurrencyDropdown.classList.add('bg-black');
     // $baseCurrencyDropdown.classList.remove('bg-white');
@@ -367,6 +368,10 @@ function updateTime() {
 }
 
 $refresh.addEventListener('click', async function() {
+
+
+
+
     await appView.init()
     const isHidden = $moon.classList.contains('hidden');
     if (isHidden) {
