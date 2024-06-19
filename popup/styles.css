@@ -44,9 +44,11 @@ h2 {
     font-size: 1.1rem;
 }
 
-.darkSrceen {
+.darkSrceen,
+body.dark-mode .currency-exchanged:first-child {
     background-color: #115e59;
-    border:0px;
+    border: none;
+    color: white;
 }
 
 .fontColor {
@@ -183,8 +185,6 @@ h2 a:hover {
     color: var(--primary);
     transition: color 0.3s ease-in-out;
 }
-
-
 
 ::-webkit-scrollbar {
     width: 5px;
