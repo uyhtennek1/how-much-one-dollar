@@ -192,11 +192,14 @@ const appView = (function() {
         const loadAmountTask = chrome.storage.local.get('base_currency_amount');
         
         const { base_currency, currency_rates, fetch_time, fetch_from, current_list } = await loadListTask;
-        const { base_currency_amount } = await loadAmountTask;
+        let { base_currency_amount } = await loadAmountTask;
 
         $baseCurrencyDropdown.replaceChildren(
             ...Object.keys(CURRENCIES).map(x => createBaseCurrencyOption(x, CURRENCIES[x]))
         );
+
+        if (!base_currency_amount)
+            base_currency_amount = 1;
         $baseCurrencyAmountInput.value = base_currency_amount;
 
         const $sun =  document.querySelector('#sun');
